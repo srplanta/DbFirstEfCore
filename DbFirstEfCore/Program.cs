@@ -1,7 +1,17 @@
+using DbFirstEfCore.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//ADDED FOLLOWING SERVICES
+string connectionString = "server=DESKTOP-MAE99H0; database=StudentDb; trusted_connection=true; TrustServerCertificate=true;";
+builder.Services.AddDbContext<StudentDbContext>(options =>
+{
+    options.UseSqlServer(connectionString);
+});
 
 var app = builder.Build();
 
