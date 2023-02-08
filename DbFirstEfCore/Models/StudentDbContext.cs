@@ -15,6 +15,7 @@ public partial class StudentDbContext : DbContext
     {
     }
 
+    public virtual DbSet<FeeBill> FeeBills { get; set; }
     public virtual DbSet<Student> Students { get; set; }
 
 //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -23,6 +24,27 @@ public partial class StudentDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<FeeBill>(entity =>
+        {
+            entity.ToTable("FeeBill");
+
+            entity.Property(e => e.AdmissionFee).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.BillingMonth).HasColumnType("date");
+            entity.Property(e => e.FeePaid).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.FeePayable).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.Fine).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.NextArrears).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.PreviousArrears).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.StationaryCharges).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.StudentId).HasColumnName("StudentID");
+            entity.Property(e => e.TutionFee).HasColumnType("decimal(18, 0)");
+
+            entity.HasOne(d => d.Student).WithMany(p => p.FeeBills)
+                .HasForeignKey(d => d.StudentId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_FeeBill_Student");
+        });
+
         modelBuilder.Entity<Student>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK_tbl_Student");

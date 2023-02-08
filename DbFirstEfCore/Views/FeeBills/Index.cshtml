@@ -1,0 +1,89 @@
+﻿@model IEnumerable<DbFirstEfCore.Models.FeeBill>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BillingMonth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PreviousArrears)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TutionFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdmissionFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fine)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StationaryCharges)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FeePayable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FeePaid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NextArrears)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Student)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillingMonth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PreviousArrears)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TutionFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdmissionFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fine)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StationaryCharges)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FeePayable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FeePaid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NextArrears)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

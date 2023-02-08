@@ -14,4 +14,6 @@ public partial class Student
     public int? Age { get; set; }
 
     public int? Standard { get; set; }
+
+    public virtual ICollection<FeeBill> FeeBills { get; } = new List<FeeBill>();
 }
